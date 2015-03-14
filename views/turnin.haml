@@ -1,14 +1,27 @@
 %h1= "#{config[:name]} Turnin"
 
-%form{method: 'post', action: '/turnin', enctype: 'multipart/form-data'}
-  - config[:group_size].times do |s|
-    .form-group
-      %label{ :for => "studentID[#{s}]" }= 'Student ID'
-      %input.form-control{ type: 'text', name: 'studentID[]', placeholder: 'Student ID'}
+.tabpanel
+  %ul.nav.nav-tabs
+    %li.active
+      %a{href: '#upload', data: {toggle: 'tab'}} Upload File
+    %li
+      %a{href: '#git', data: {toggle: 'tab'}} Via Git
 
-  .form-group
-    %label{for: 'file'} File input
-    %input{type: 'file', name: 'file'}
-    %p.help-block Example block-level help text here.
+  .tab-content
+    .tab-pane.active#upload
+      %form{method: 'post', action: '/turnin', enctype: 'multipart/form-data'}
+        - config[:group_size].times do |s|
+          .form-group
+            %label{ :for => "studentID[#{s}]" }= 'Student ID'
+            %input.form-control{ type: 'text', name: 'studentID[]', placeholder: 'Student ID'}
 
-  %button.btn.btn-default{type: 'submit'} Submit
+        .form-group
+          %label{for: 'file'} File input
+          %input{type: 'file', name: 'file'}
+          %p.help-block Example block-level help text here.
+
+        %input{type: 'hidden', name: 'type', value: 'upload'}
+        %button.btn.btn-default{type: 'submit'} Submit
+
+    .tab-pane#git
+      %h2 TODO
