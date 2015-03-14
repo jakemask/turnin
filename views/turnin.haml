@@ -1,11 +1,14 @@
-%h1= "#{config['name']} Turnin"
-%form{method: 'post', action: '/turnin'}
-  - config['group_size'].times do |s|
+%h1= "#{config[:name]} Turnin"
+
+%form{method: 'post', action: '/turnin', enctype: 'multipart/form-data'}
+  - config[:group_size].times do |s|
     .form-group
-      %label{ :for => "studentID[#{s}]" }= "Student ID"
-      %input.form-control{ type: "text", name: "studentID[]", placeholder: "Student ID"}
-  -#.form-group
-    <label for="exampleInputFile">File input</label>
-    <input type="file" id="exampleInputFile">
-    <p class="help-block">Example block-level help text here.</p>
-  %button.btn.btn-default{type: "submit"} Submit
+      %label{ :for => "studentID[#{s}]" }= 'Student ID'
+      %input.form-control{ type: 'text', name: 'studentID[]', placeholder: 'Student ID'}
+
+  .form-group
+    %label{for: 'file'} File input
+    %input{type: 'file', name: 'file'}
+    %p.help-block Example block-level help text here.
+
+  %button.btn.btn-default{type: 'submit'} Submit
